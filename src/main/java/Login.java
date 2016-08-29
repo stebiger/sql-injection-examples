@@ -1,4 +1,5 @@
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -7,6 +8,7 @@ import java.sql.SQLException;
  */
 
 @ManagedBean
+@SessionScoped
 public class Login {
 
     private String username;

@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by stefan on 29.08.16.
@@ -37,5 +39,30 @@ public class Database {
         }
 
         return user;
+    }
+
+    public List<String> queryFriends(String query) {
+        List<String> friends = new ArrayList<>();
+        try {
+        Class.forName(driver).newInstance();
+        conn = DriverManager.getConnection(url + dbName, userName, password);
+        Statement st = conn.createStatement();
+        System.out.println("Query is: " + query);
+
+        ResultSet result = st.executeQuery(query);
+            while(result.next()) {
+                friends.add(result.getString("friendname"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return friends;
     }
 }
